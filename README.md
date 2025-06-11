@@ -18,7 +18,7 @@ Aplikasi **WebAR (Augmented Reality)** berbasis marker untuk memperkenalkan Prog
 ## 🏗️ Teknologi
 
 - **Frontend**: React 19.1.0 + TypeScript + Vite
-- **AR Library**: MindAR.js + mind-ar-react
+- **AR Library**: MindAR.js
 - **Styling**: Tailwind CSS 4.1.8
 - **Build Tool**: Vite 6.3.5
 - **Deployment**: Vercel-ready

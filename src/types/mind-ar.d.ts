@@ -16,14 +16,3 @@ declare module 'mind-ar' {
     stop(): void;
   }
 }
-
-declare module 'mind-ar-react' {
-  export interface MindARReactProps {
-    imageTargetSrc: string;
-    onTargetFound?: () => void;
-    onTargetLost?: () => void;
-    children?: React.ReactNode;
-  }
-
-  export const MindARReact: React.FC<MindARReactProps>;
-}

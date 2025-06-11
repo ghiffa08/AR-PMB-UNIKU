@@ -23,7 +23,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Separate MindAR into its own chunk for better loading
-          'mind-ar': ['mind-ar', 'mind-ar-react'],
+          'mind-ar': ['mind-ar'],
           // Separate vendor libraries
           vendor: ['react', 'react-dom']
         }
