@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎪 AR Magic Markers - HIMA-TI UNIKU</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .marker-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            text-align: center;
+            margin: 20px 0;
+            border: 4px solid #FFD700;
+        }
+        .marker {
+            width: 200px;
+            height: 200px;
+            border: 4px solid #000;
+            margin: 20px auto;
+            position: relative;
+            background: white;
+            border-radius: 15px;
+        }
+        
+        /* Marker Patterns */
+        .ikan-pattern {
+            position: absolute;
+            inset: 15px;
+            background: 
+                radial-gradient(circle at 30% 30%, #1E90FF 12px, transparent 12px),
+                radial-gradient(circle at 70% 30%, #FF6347 10px, transparent 10px),
+                radial-gradient(circle at 50% 70%, #32CD32 14px, transparent 14px),
+                linear-gradient(45deg, #4169E1 3px, transparent 3px),
+                linear-gradient(-45deg, #FF1493 2px, transparent 2px);
+            background-size: 50px 50px, 60px 60px, 55px 55px, 25px 25px, 20px 20px;
+            border-radius: 10px;
+        }
+        
+        .robot-pattern {
+            position: absolute;
+            inset: 15px;
+            background: 
+                radial-gradient(circle at 25% 25%, #C0C0C0 8px, transparent 8px),
+                radial-gradient(circle at 75% 25%, #C0C0C0 10px, transparent 10px),
+                radial-gradient(circle at 25% 75%, #C0C0C0 12px, transparent 12px),
+                radial-gradient(circle at 75% 75%, #C0C0C0 9px, transparent 9px),
+                linear-gradient(0deg, #000 2px, transparent 2px),
+                linear-gradient(90deg, #000 2px, transparent 2px);
+            background-size: 40px 40px, 50px 50px, 45px 45px, 42px 42px, 15px 15px, 15px 15px;
+            border-radius: 10px;
+        }
+        
+        .kupu-pattern {
+            position: absolute;
+            inset: 15px;
+            background: 
+                radial-gradient(circle at 35% 35%, #FF69B4 10px, transparent 10px),
+                radial-gradient(circle at 65% 35%, #FF1493 12px, transparent 12px),
+                radial-gradient(circle at 35% 65%, #DA70D6 8px, transparent 8px),
+                radial-gradient(circle at 65% 65%, #BA55D3 11px, transparent 11px),
+                linear-gradient(45deg, #DDA0DD 2px, transparent 2px),
+                linear-gradient(-45deg, #E6E6FA 2px, transparent 2px);
+            background-size: 45px 45px, 55px 55px, 40px 40px, 50px 50px, 18px 18px, 18px 18px;
+            border-radius: 10px;
+        }
+        
+        .dino-pattern {
+            position: absolute;
+            inset: 15px;
+            background: 
+                radial-gradient(circle at 40% 30%, #228B22 15px, transparent 15px),
+                radial-gradient(circle at 60% 50%, #32CD32 10px, transparent 10px),
+                radial-gradient(circle at 30% 70%, #ADFF2F 13px, transparent 13px),
+                linear-gradient(30deg, #006400 3px, transparent 3px),
+                linear-gradient(-30deg, #8FBC8F 2px, transparent 2px);
+            background-size: 60px 60px, 45px 45px, 50px 50px, 22px 22px, 18px 18px;
+            border-radius: 10px;
+        }
+        
+        .kampus-pattern {
+            position: absolute;
+            inset: 15px;
+            background: 
+                radial-gradient(circle at 20% 20%, #DC143C 8px, transparent 8px),
+                radial-gradient(circle at 80% 20%, #DC143C 10px, transparent 10px),
+                radial-gradient(circle at 20% 80%, #DC143C 12px, transparent 12px),
+                radial-gradient(circle at 80% 80%, #DC143C 9px, transparent 9px),
+                radial-gradient(circle at 50% 50%, #FFD700 6px, transparent 6px),
+                linear-gradient(0deg, #B22222 1px, transparent 1px),
+                linear-gradient(90deg, #B22222 1px, transparent 1px);
+            background-size: 35px 35px, 42px 42px, 38px 38px, 40px 40px, 30px 30px, 12px 12px, 12px 12px;
+            border-radius: 10px;
+        }
+        
+        .himati-pattern {
+            position: absolute;
+            inset: 15px;
+            background: 
+                conic-gradient(from 0deg, #8A2BE2 90deg, transparent 90deg, transparent 180deg, #8A2BE2 180deg, #8A2BE2 270deg, transparent 270deg),
+                radial-gradient(circle at 50% 25%, #FF1493 12px, transparent 12px),
+                radial-gradient(circle at 25% 75%, #00CED1 10px, transparent 10px),
+                radial-gradient(circle at 75% 75%, #FF4500 8px, transparent 8px),
+                linear-gradient(45deg, transparent 35%, #8A2BE2 35%, #8A2BE2 65%, transparent 65%);
+            background-size: 70px 70px, 50px 50px, 45px 45px, 40px 40px, 30px 30px;
+            border-radius: 10px;
+        }
+
+        .corner-decoration {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #FFD700;
+            border-radius: 50%;
+        }
+        .corner-decoration.top-left { top: -10px; left: -10px; }
+        .corner-decoration.top-right { top: -10px; right: -10px; }
+        .corner-decoration.bottom-left { bottom: -10px; left: -10px; }
+        .corner-decoration.bottom-right { bottom: -10px; right: -10px; }
+
+        .instructions {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid #FFD700;
+        }
+        
+        .fun-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .grid-markers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        @media print {
+            body { 
+                background: white; 
+                color: black;
+            }
+            .instructions { 
+                display: none; 
+            }
+            .header {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="fun-title">🎪 AR Magic Markers</h1>
+        <h2>🤖 HIMA-TI UNIKU - Divisi IPTEK 🚀</h2>
+        <p style="font-size: 1.2em;">✨ Petualangan Edukatif untuk Anak-anak! ✨</p>
+    </div>
+    
+    <div class="instructions">
+        <h3>🎯 Cara Bermain AR Magic:</h3>
+        <ol style="font-size: 1.1em; line-height: 1.6;">
+            <li>📄 <strong>Print halaman ini</strong> pada kertas putih ukuran A4</li>
+            <li>✂️ <strong>Gunting</strong> marker yang kamu inginkan (opsional)</li>
+            <li>📱 <strong>Buka aplikasi AR Magic</strong> di browser HP</li>
+            <li>🎯 <strong>Arahkan kamera</strong> ke marker pilihan kamu</li>
+            <li>✨ <strong>Lihat keajaiban AR</strong> dan bermain dengan teman-teman virtual!</li>
+        </ol>
+        <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; margin-top: 15px;">
+            <p><strong>💡 Tips Super:</strong></p>
+            <ul>
+                <li>🔆 Pastikan pencahayaan cukup terang</li>
+                <li>📏 Jaga jarak 20-50cm dari marker</li>
+                <li>🤳 Pegang HP dengan stabil</li>
+                <li>🎨 Marker jangan terlipat atau kotor</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="grid-markers">
+        <div class="marker-container">
+            <h2 style="color: #1E90FF;">🐠 Teman Ikan Lucu</h2>
+            <div class="marker">
+                <div class="ikan-pattern"></div>
+                <div class="corner-decoration top-left"></div>
+                <div class="corner-decoration top-right"></div>
+                <div class="corner-decoration bottom-left"></div>
+                <div class="corner-decoration bottom-right"></div>
+            </div>
+            <p style="color: #666;">Lihat ikan-ikan berenang dan belajar tentang kehidupan laut! 🌊</p>
+        </div>
+
+        <div class="marker-container">
+            <h2 style="color: #C0C0C0;">🤖 Robot HIMA-TI</h2>
+            <div class="marker">
+                <div class="robot-pattern"></div>
+                <div class="corner-decoration top-left"></div>
+                <div class="corner-decoration top-right"></div>
+                <div class="corner-decoration bottom-left"></div>
+                <div class="corner-decoration bottom-right"></div>
+            </div>
+            <p style="color: #666;">Bertemu robot pintar dan pelajari teknologi masa depan! ⚡</p>
+        </div>
+
+        <div class="marker-container">
+            <h2 style="color: #FF69B4;">🦋 Kupu-kupu Cantik</h2>
+            <div class="marker">
+                <div class="kupu-pattern"></div>
+                <div class="corner-decoration top-left"></div>
+                <div class="corner-decoration top-right"></div>
+                <div class="corner-decoration bottom-left"></div>
+                <div class="corner-decoration bottom-right"></div>
+            </div>
+            <p style="color: #666;">Terbang bersama kupu-kupu dan pelajari tentang alam! 🌸</p>
+        </div>
+
+        <div class="marker-container">
+            <h2 style="color: #228B22;">🦕 Dinosaurus Raksasa</h2>
+            <div class="marker">
+                <div class="dino-pattern"></div>
+                <div class="corner-decoration top-left"></div>
+                <div class="corner-decoration top-right"></div>
+                <div class="corner-decoration bottom-left"></div>
+                <div class="corner-decoration bottom-right"></div>
+            </div>
+            <p style="color: #666;">Jelajahi zaman dinosaurus dan pelajari sejarah bumi! 🌍</p>
+        </div>
+
+        <div class="marker-container">
+            <h2 style="color: #DC143C;">🏛️ Kampus UNIKU</h2>
+            <div class="marker">
+                <div class="kampus-pattern"></div>
+                <div class="corner-decoration top-left"></div>
+                <div class="corner-decoration top-right"></div>
+                <div class="corner-decoration bottom-left"></div>
+                <div class="corner-decoration bottom-right"></div>
+            </div>
+            <p style="color: #666;">Virtual tour kampus dan kenali Universitas Kuningan! 🎓</p>
+        </div>
+
+        <div class="marker-container">
+            <h2 style="color: #8A2BE2;">💻 HIMA-TI Coding</h2>
+            <div class="marker">
+                <div class="himati-pattern"></div>
+                <div class="corner-decoration top-left"></div>
+                <div class="corner-decoration top-right"></div>
+                <div class="corner-decoration bottom-left"></div>
+                <div class="corner-decoration bottom-right"></div>
+            </div>
+            <p style="color: #666;">Belajar coding dan teknologi bersama HIMA-TI! 🚀</p>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <h3>🔧 Troubleshooting - Jika Ada Masalah:</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+            <div style="background: #fff3cd; padding: 15px; border-radius: 10px;">
+                <strong>❌ Marker tidak terdeteksi:</strong><br>
+                🔆 Tambah pencahayaan<br>
+                📏 Atur jarak kamera<br>
+                🎯 Pastikan marker rata
+            </div>
+            <div style="background: #d1ecf1; padding: 15px; border-radius: 10px;">
+                <strong>❌ AR tidak muncul:</strong><br>
+                🔄 Refresh halaman<br>
+                📷 Izinkan akses kamera<br>
+                🌐 Gunakan Chrome/Safari
+            </div>
+            <div style="background: #d4edda; padding: 15px; border-radius: 10px;">
+                <strong>❌ Lemot/lag:</strong><br>
+                📱 Tutup app lain<br>
+                🔋 Pastikan baterai cukup<br>
+                🌐 Koneksi internet stabil
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px; padding: 15px; background: linear-gradient(45deg, #FFD700, #FFA500); border-radius: 10px;">
+            <h4 style="margin: 0; color: #333;">🎉 Selamat Bermain & Belajar! 🎉</h4>
+            <p style="margin: 5px 0; color: #333;"><strong>Follow IG:</strong> @himati_uniku | <strong>Website:</strong> uniku.ac.id</p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(0,0,0,0.1); border-radius: 15px;">
+        <p style="margin: 0; font-size: 1.1em;">© 2025 <strong>HIMA-TI Universitas Kuningan</strong></p>
+        <p style="margin: 5px 0;">🚀 Divisi IPTEK - PMB AR Magic Experience 🌟</p>
+        <p style="margin: 0; font-size: 0.9em; opacity: 0.8;">Menghadirkan teknologi AR untuk edukasi anak-anak Indonesia 🇮🇩</p>
+    </footer>
+</body>
+</html>

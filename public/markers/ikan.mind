@@ -1,0 +1,12 @@
+# Sample marker file for AR PMB Universitas Kuningan
+# This is a placeholder for the actual .mind marker file
+# In production, you would replace this with an actual MindAR marker file
+
+# To create a proper marker file:
+# 1. Visit: https://hiukim.github.io/mind-ar-js-doc/tools/compile-target
+# 2. Upload your marker image (recommended: high contrast, lots of features)
+# 3. Download the generated .mind file
+# 4. Replace this file with the generated .mind file
+
+# For now, this file serves as a placeholder to prevent 404 errors
+# The application will fall back to simulation mode when this file is used
